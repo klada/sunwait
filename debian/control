@@ -1,0 +1,15 @@
+Source: sunwait
+Maintainer: Daniel Klaffenbach <danielklaffenbach@gmail.com>
+Section: misc
+Priority: optional
+Standards-Version: 3.9.2
+Build-Depends: debhelper (>= 9)
+Homepage: http://sourceforge.net/projects/sunwait4windows/
+
+Package: sunwait
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Small program for calculating sunrise, sunset and twilights
+ Sunwait is a small program for calculating sunrise and sunset, as well as civil,
+ nautical, and astronomical twilights. It has features that make it useful for home
+ automation tasks.
