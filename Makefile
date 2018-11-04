@@ -5,10 +5,10 @@
 #
 
 
-C=gcc
+C=g++
 CFLAGS=-c -Wall 
-LDFLAGS= -lm -lstdc++
-SOURCES=sunwait.cpp sunriset.cpp print.cpp sunwait.h sunriset.h print.h
+LDFLAGS= -lm
+SOURCES=sunwait.cpp sunriset.cpp print.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=sunwait
 
