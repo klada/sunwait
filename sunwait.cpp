@@ -859,6 +859,7 @@ int main (int argc, char *argv[])
 
     // Shave off (add) UTC offset, so that time_t is converted from midnight local-time to midnight UTC on the target day
     targetTm.tm_sec += myRound (pRun->utcBiasHours * 60.0 * 60.0);
+    targetTm.tm_isdst = daylight;
 
     // All done
     pRun->targetTimet = mktime (&targetTm);  // <<<<<< The important bit done <<< targetTimet is set to midnight UTC
