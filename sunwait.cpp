@@ -434,7 +434,7 @@ double getUtcBiasHours (const time_t *pTimet)
   struct tm tmpTm;
   double utcBiasHours = 0.0;
 
-  // Populate "struct tm" with UTC data for the given day
+  // Populate "struct tm" with calendar data for the given day
   myLocalTime (pTimet, &tmpTm);
 
   /* Windows code: Start */
