@@ -34,7 +34,7 @@ const double VERSION=0.8; // <<<<<<<<< CHANGE ME
 #endif
 
 // Linux
-#if defined __linux__
+#if defined __linux__ || defined __APPLE__
   #include <unistd.h>
 #endif
 
@@ -395,7 +395,7 @@ void myUtcTime (const time_t *pTimet, struct tm *pTm)
     /* Windows code: End */
 
     /* Linux code: Start */
-      #if defined __linux__
+      #if defined __linux__ || defined __APPLE__
         gmtime_r (pTimet, pTm);
       #endif
     /* Linux code: End */
@@ -415,7 +415,7 @@ void myLocalTime (const time_t *pTimet, struct tm *pTm)
     /* Windows code: End */
 
     /* Linux code: Start */
-      #if defined __linux__
+      #if defined __linux__ || defined __APPLE__
         localtime_r (pTimet, pTm);
       #endif
     /* Linux code: End */
@@ -477,7 +477,7 @@ double getUtcBiasHours (const time_t *pTimet)
   /* Windows code: End */
 
   /* Linux code: Start */
-  #if defined __linux__
+  #if defined __linux__ || defined __APPLE__
     char buffer [80];
     signed long int tmpLong = 0;
 
@@ -1121,7 +1121,7 @@ int wait (const runStruct *pRun)
   /* Windows code: End */
 
   /* Linux code: Start */
-  #if defined __linux__
+  #if defined __linux__ || defined __APPLE__
     sleep (waitSeconds);    // Linux-only (seconds OK)
   #endif
   /* Linux code: End */
