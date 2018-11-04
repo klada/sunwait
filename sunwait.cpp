@@ -801,7 +801,10 @@ int main (int argc, char *argv[])
   ** Get: Target Date
   */
 
-  { struct tm targetTm;
+  { struct tm targetTm, localTm;
+
+    myLocalTime (&pRun->nowTimet, &localTm);
+    int isdst = localTm.tm_isdst;
 
     // Populate targetTm :-
     // Get the target day (as "struct tm") for "now" - the default
@@ -859,7 +862,7 @@ int main (int argc, char *argv[])
 
     // Shave off (add) UTC offset, so that time_t is converted from midnight local-time to midnight UTC on the target day
     targetTm.tm_sec += myRound (pRun->utcBiasHours * 60.0 * 60.0);
-    targetTm.tm_isdst = daylight;
+    targetTm.tm_isdst = isdst;
 
     // All done
     pRun->targetTimet = mktime (&targetTm);  // <<<<<< The important bit done <<< targetTimet is set to midnight UTC
