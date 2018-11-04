@@ -431,11 +431,11 @@ void myLocalTime (const time_t *pTimet, struct tm *pTm)
 */
 double getUtcBiasHours (const time_t *pTimet)
 {
-  struct tm utcTm;
+  struct tm tmpTm;
   double utcBiasHours = 0.0;
 
   // Populate "struct tm" with UTC data for the given day
-  myUtcTime (pTimet, &utcTm);
+  myLocalTime (pTimet, &tmpTm);
 
   /* Windows code: Start */
   #if defined _WIN32 || defined _WIN64
@@ -443,13 +443,13 @@ double getUtcBiasHours (const time_t *pTimet)
 
     // Keep to the same day given, but go for noon. Daylight savings changes usually happen in the early hours.
     // mktime() changes the values in "struct tm", so I need to use a private one anyway.
-    utcTm.tm_hour = 12;
-    utcTm.tm_min  = 0;
-    utcTm.tm_sec  = 0;
+    tmpTm.tm_hour = 12;
+    tmpTm.tm_min  = 0;
+    tmpTm.tm_sec  = 0;
 
     // Now convert this time to time_t (which is always, by definition, UTC),
     // so I can run both of the two functions I can use that differentiate between timezones, using the same UTC moment.
-    time_t noonTimet = mktime (&utcTm); // Unfortunately this is noonTimet is local time. It's the best I can do.
+    time_t noonTimet = mktime (&tmpTm); // Unfortunately this is noonTimet is local time. It's the best I can do.
                                         // If it was UTC, all locations on earth are within the same day at noon.
                                         // (Because UTC = GMT.  Noon GMT +/- 12hrs nestles upto, but not across, the dateline)
                                         // Local-time 'days' (away from GMT) will probably cross the date line.
@@ -481,9 +481,9 @@ double getUtcBiasHours (const time_t *pTimet)
     char buffer [80];
     signed long int tmpLong = 0;
 
-    mktime (&utcTm); // Let "mktime()" do it's magic
+    mktime (&tmpTm); // Let "mktime()" do its magic
 
-    strftime (buffer, 80, "%z", &utcTm);
+    strftime (buffer, 80, "%z", &tmpTm);
 
     if (strlen (buffer) > 0 && myIsNumber (buffer))
     { tmpLong = atol (buffer);
