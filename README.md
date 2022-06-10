@@ -1,3 +1,9 @@
+# :warning: Attention
+
+The original author of sunwait has moved to GitHub, so this project here should be considered obsolete. It was only supposed to be a mirror anyway.
+
+Please use the following code instead: https://github.com/risacher/sunwait
+
 # sunwait
 Sunwait is a small C program for calculating sunrise and sunset, as well as civil, nautical, and astronomical twilights. It has features that make it useful for home automation tasks.
 
